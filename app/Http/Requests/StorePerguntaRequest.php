@@ -15,15 +15,13 @@ class StorePerguntaRequest extends FormRequest
     }
 
     /**
-     * TICKET #001: Implemente aqui as regras de validação estritas.
-     * Requisitos:
-     * - texto: obrigatório, string, mínimo de 10 caracteres, máximo de 255.
-     * - evento_id: obrigatório, deve existir na tabela eventos.
+     * Valida o texto da pergunta e a existência do evento (Ticket #001).
      */
     public function rules(): array
     {
         return [
-            // TODO (Dev Jr): Adicione as regras de validação para o Ticket #001
+            'texto' => ['required', 'string', 'min:10', 'max:255'],
+            'evento_id' => ['required', 'exists:eventos,id'],
         ];
     }
 }
