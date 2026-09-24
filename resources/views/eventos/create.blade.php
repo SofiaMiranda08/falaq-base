@@ -3,51 +3,51 @@
 @section('title', 'Criar Evento — FalaQ')
 
 @section('content')
-<div class="row">
-    <!-- Formularço de envio de Pergunta -->
-    <div class="col-md-5 mb-4">
-        <div class="card shadow-sm p-3">
-            <h4 class="fw-bold mb-3">💬 Faça sua Pergunta</h4>
-            <form action="{{ route('eventos.store') }}" method="POST">
-                @csrf
-                <div class="mb-3">
-                    <label for="titulo" class="form-label text-secondary">Titulo do Evento</label>
+<div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md text-gray-900">
+    <h2 class="text-2xl font-bold mb-6">Criar Novo Evento</h2>
 
-                    <input name="titulo" id="titulo" rows="4" 
-                              class="form-control bg-dark text-white border-secondary @error('titulo') is-invalid @enderror"></input>
+    <form action="{{ route('eventos.store') }}" method="POST">
+        @csrf
 
-                    @error('titulo')
-                        <div class="invalid-feedback fw-bold">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="mb-3">
-                    <label for="descricao" class="form-label text-secondary">Descrição do Evento</label>
+        <div class="mb-4">
+            <label for="titulo" class="block font-semibold mb-2">Título</label>
 
-                    <input name="descricao" id="descricao" rows="4" 
-                              class="form-control bg-dark text-white border-secondary @error('descricao') is-invalid @enderror"></input>
+            <input
+                type="text"
+                name="titulo"
+                id="titulo"
+                value="{{ old('titulo') }}"
+                class="w-full border border-gray-300 rounded-md p-2 @error('titulo') border-red-500 @enderror"
+                placeholder="Digite o título do evento"
+            >
 
-                    @error('descricao')
-                        <div class="invalid-feedback fw-bold">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="mb-3">
-                    <label for="data_evento" class="form-label text-secondary">Data</label>
-
-                    <input name="data_evento" id="data_evento" rows="4"  type="date"
-                              class="form-control bg-dark text-white border-secondary @error('data_evento') is-invalid @enderror"></input>
-
-                    @error('data_evento')
-                        <div class="invalid-feedback fw-bold">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <button type="submit" class="btn btn-primary w-100 fw-bold">Criar Evento</button>
-            </form>
+            @error('titulo')
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
         </div>
-    </div>
+
+        <div class="mb-4">
+            <label for="descricao" class="block font-semibold mb-2">Descrição</label>
+
+            <textarea
+                name="descricao"
+                id="descricao"
+                rows="5"
+                class="w-full border border-gray-300 rounded-md p-2 @error('descricao') border-red-500 @enderror"
+                placeholder="Digite a descrição do evento"
+            >{{ old('descricao') }}</textarea>
+
+            @error('descricao')
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <button
+            type="submit"
+            class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+        >
+            Criar Evento
+        </button>
+    </form>
+</div>
 @endsection
