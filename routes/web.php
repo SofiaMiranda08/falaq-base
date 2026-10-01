@@ -27,6 +27,9 @@ Route::get('/eventos/{id}', [EventoController::class, 'show'])->name('eventos.sh
 Route::post('/eventos/{id}/perguntas', [EventoController::class, 'storePergunta'])
     ->middleware('auth')
     ->name('eventos.perguntas.store');
+Route::delete('/perguntas/{pergunta}', [EventoController::class, 'destroyPergunta'])
+    ->middleware('auth')
+    ->name('perguntas.destroy');
 
 
 require __DIR__.'/auth.php';

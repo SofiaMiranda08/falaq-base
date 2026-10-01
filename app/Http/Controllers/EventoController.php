@@ -58,6 +58,17 @@ class EventoController extends Controller
     }
 
 
+    public function destroyPergunta(Pergunta $pergunta)
+    {
+        $this->authorize('delete', $pergunta);
+
+        $eventoId = $pergunta->evento_id;
+        $pergunta->delete();
+
+        return redirect()->route('eventos.show', $eventoId)
+            ->with('sucesso', 'Pergunta excluída com sucesso!');
+    }
+
     public function create(){
         return view('eventos.create');
     }
